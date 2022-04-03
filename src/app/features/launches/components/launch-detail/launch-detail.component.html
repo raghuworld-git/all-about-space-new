@@ -1,0 +1,135 @@
+<ng-container *ngIf="launchDetails">
+  <div class="row">
+    <div class="col">
+      <h5>{{ launchDetails?.name }}</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-2">
+      <img
+        [src]="launchDetails?.image"
+        [ngStyle]="{ height: '300px' }"
+        class="img-thumbnail cover"
+        [alt]="launchDetails?.name"
+      />
+    </div>
+    <div class="col-md-6">
+      <div class="card darkColor" [ngStyle]="{ height: '300px' }">
+        <div class="card-body text-center d-flex flex-column">
+          <app-countdown
+            [finalDate]="launchDetails.net"
+            *ngIf="!launchDetails.isLaunchCompleted; else launchCompletedTimeRef"
+          ></app-countdown>
+          <ng-template #launchCompletedTimeRef>
+            <p class="h4">T+ 00 d : 00 h : 00 m: 00 s</p>
+          </ng-template>
+          <p>
+            <i data-test="fa" class="fa fa-calendar-day"></i>
+            {{ launchDetails.net | date: "medium" }}
+          </p>
+          <p>
+            <span class="badge badge-secondary">
+              {{
+                launchDetails?.rocket?.spacecraft_stage != null
+                  ? "Manned"
+                  : "Un-manned"
+              }}
+              launch
+            </span>
+          </p>
+          <p>
+            <span
+              [title]="launchDetails?.status?.description"
+              [ngClass]="['badge', 'badge-' + launchDetails.statusColor]"
+              >{{ launchDetails?.status?.name }}
+            </span>
+          </p>
+          <p>
+            <i data-test="fa" class="fa fa-map-marker-alt"></i>
+            {{ launchDetails.pad.location.name }}
+          </p>
+          <p>Agency: {{ launchDetails.launch_service_provider.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="failOrHoldReason !== null">
+    <div class="row mt-1">
+      <div class="col">
+        <h6>{{ failOrHoldReason!.reason }} reason :</h6>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-description-card [description]="failOrHoldReason!.description">
+        </app-description-card>
+      </div>
+    </div>
+  </ng-container>
+  <div class="row">
+    <div class="col-md-6 mt-1">
+      <div class="row">
+        <div class="col">
+          <h6>Mission :</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <app-description-card
+            [description]="launchDetails.mission?.description"
+          >
+          </app-description-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mt-1">
+      <div class="row">
+        <div class="col">
+          <h6>Rocket's description :</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <app-description-card
+            [description]="launchDetails.rocket.configuration.description"
+          >
+          </app-description-card>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2" *ngIf="videoURL != null">
+    <div class="col-md-12">
+      <iframe
+        width="100%"
+        height="315"
+        [src]="videoURL"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <ng-container *ngIf="launchDetails?.rocket?.spacecraft_stage != null">
+    <div class="row mt-1">
+      <div class="col">
+        <h6>Crew members:</h6>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        class="col-md-3 mt-1"
+        *ngFor="let crewMember of launchDetails.customCrewMembers"
+      >
+        <a [routerLink]="['/astronaut', crewMember.astronaut.id]">
+          <app-single-astronaut [crew]="crewMember"></app-single-astronaut>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

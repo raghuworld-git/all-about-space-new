@@ -1,0 +1,29 @@
+<div class="card darkColor">
+  <img
+    [src]="crew.astronaut.profile_image"
+    class="card-img-top"
+    [alt]="crew.astronaut.name"
+    [ngStyle]="{
+      height: '200px',
+      width: '100%',
+      'object-fit': 'contain'
+    }"
+  />
+  <div class="card-body">
+    <p
+      class="card-text text-white text-center d-flex flex-column"
+      style="font-size: small"
+    >
+      <span
+        [title]="crew.astronaut.name"
+        class="d-inline-block text-truncate"
+        >{{ crew.astronaut.name }}</span
+      >
+      <span
+        [title]="crew.role.role"
+        class="text-muted d-inline-block text-truncate"
+        >{{ crew.role.role }}</span
+      >
+    </p>
+  </div>
+</div>

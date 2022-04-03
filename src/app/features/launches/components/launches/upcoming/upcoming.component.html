@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col text-center">
+    <h5>Upcoming Launches</h5>
+  </div>
+</div>
+
+<app-launch-filter
+  [isUpcoming]="true"
+  (searchEvent)="onSearch($event)"
+></app-launch-filter>
+<ng-container *ngIf="launchList.length > 0">
+  <div class="row">
+    <div class="col-md-6 col-xs-12 my-1" *ngFor="let launch of launchList">
+      <app-single-launch-card
+        [url]="'/launches/launchdetail'"
+        [launchInfo]="launch"
+      ></app-single-launch-card>
+    </div>
+  </div>
+</ng-container>
