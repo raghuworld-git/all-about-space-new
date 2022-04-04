@@ -4,19 +4,14 @@ import { BehaviorSubject } from "rxjs";
 @Injectable({
     providedIn: 'root'
 })
-export class LocalStorageService {
-
-    private _myData$ = new BehaviorSubject<string>(null);
-    myData$ = this._myData$.asObservable();
-
+export class LocalStorageService {    
     private get localStorage(): Storage {
         return localStorage;
     }
 
     setInfo(storageData: IlocalStorageData): void {
         const jsonData = JSON.stringify(storageData.value);
-        this.localStorage.setItem(storageData.key, jsonData);
-        this._myData$.next(jsonData);
+        this.localStorage.setItem(storageData.key, jsonData);       
     }
 
     loadInfo(key: string): string | null {
@@ -32,8 +27,7 @@ export class LocalStorageService {
     }
 
     clearInfo(key: string) {
-        this.localStorage.removeItem(key);
-        this._myData$.next(null);
+        this.localStorage.removeItem(key);       
     }
 
 }

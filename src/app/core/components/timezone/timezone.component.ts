@@ -13,13 +13,13 @@ export class TimezoneComponent implements OnInit {
   modalRef: MdbModalRef<TimezoneChangeComponent> | null = null;
 
   constructor(
-    private tzService: TimeZoneService,
+    public tzService: TimeZoneService,
     private modalService: MdbModalService) { }
 
   locallyStoredTimeZone: string = "";
 
-  ngOnInit(): void {
-    this.locallyStoredTimeZone = this.tzService.getBrowserTimeZone();
+  ngOnInit(): void {    
+    this.locallyStoredTimeZone = this.tzService.getBrowserTimeZone();    
   }
 
   private config = {
@@ -37,7 +37,7 @@ export class TimezoneComponent implements OnInit {
         locallyStoredTZ: this.locallyStoredTimeZone
       }
     });
-    this.modalRef.onClose.subscribe((message: any) => {      
+    this.modalRef.onClose.subscribe((message: any) => {
       if (message != null || message != undefined)
         this.tzService.updateTimeZone(message);
     });

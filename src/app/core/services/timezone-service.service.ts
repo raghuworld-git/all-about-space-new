@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 import timezones from "timezones-list"
 import * as dayjs from 'dayjs';
 import * as utc from "dayjs/plugin/utc";
@@ -8,10 +9,15 @@ import { ITimeZone } from '../../shared/models/timeZone.model';
 import { LocalStorageEnum } from '../../shared/models/localStorage-key-enum.enum';
 import { LocalStorageService } from "./local-storage.service";
 
+
 @Injectable({
     providedIn: "root"
 })
 export class TimeZoneService {
+
+    private _myData$ = new BehaviorSubject<string>(this.getBrowserTimeZone());
+    myData$ = this._myData$.asObservable();
+
 
     constructor(private _localStorage: LocalStorageService) {
         dayjs.extend(utc);
@@ -44,7 +50,8 @@ export class TimeZoneService {
     }
 
     updateTimeZone(data: string) {
-        this._localStorage.setInfo({ key: LocalStorageEnum.timezone, value: data })
+        this._localStorage.setInfo({ key: LocalStorageEnum.timezone, value: data });
+        this._myData$.next(data);
     }
     
 }

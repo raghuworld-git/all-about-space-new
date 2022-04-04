@@ -18,7 +18,7 @@ export class UpcomingComponent implements OnInit, OnDestroy {
 
   private launchServiceSubscription!: Subscription;
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.getlaunchesByType();
   }
 
