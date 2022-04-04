@@ -18,11 +18,10 @@ export class TimeZoneService {
         dayjs.extend(timezone);
     }
 
-    getBrowserTimeZone(): string {
-        console.log('calling this call again again unncessarily')
-        let localStorageValueByKey = this._localStorage.loadInfo(LocalStorageEnum.timezone);
-        if (localStorageValueByKey === null) {
-            this._localStorage.setInfo({ key: LocalStorageEnum.timezone, value: dayjs.tz.guess() });
+    getBrowserTimeZone(): string {           
+        let localStorageValueByKey = this._localStorage.loadInfo(LocalStorageEnum.timezone);        
+        if (localStorageValueByKey === null || this.getListOfTimeZones().filter(x => x.tzCode.toLocaleLowerCase() === localStorageValueByKey.toLocaleLowerCase()).length <= 0) {
+            this.updateTimeZone(dayjs.tz.guess());
             localStorageValueByKey = dayjs.tz.guess();
         }
         if (localStorageValueByKey === "Asia/Calcutta") {
@@ -33,7 +32,7 @@ export class TimeZoneService {
 
     getListOfTimeZones(): ITimeZone[] {
         return timezones.sort((a, b) => {
-            let fa = a.label.toLocaleLowerCase(), fb = b.label.toLocaleLowerCase();
+            let fa = a.name.toLocaleLowerCase(), fb = b.name.toLocaleLowerCase();
             if (fa < fb) {
                 return -1;
             }
@@ -47,4 +46,5 @@ export class TimeZoneService {
     updateTimeZone(data: string) {
         this._localStorage.setInfo({ key: LocalStorageEnum.timezone, value: data })
     }
+    
 }
