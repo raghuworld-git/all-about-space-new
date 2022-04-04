@@ -13,8 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private subscribe: Subscription;  
 
-  ngOnInit() {    
-    console.log('me first');
+  ngOnInit() {        
     this.subscribe = this.loader.loading$.subscribe((value) => {
       Promise.resolve(null).then(() => this.isLoading = value);
     })
