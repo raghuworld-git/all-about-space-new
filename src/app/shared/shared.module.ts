@@ -5,6 +5,7 @@ import { SingleLaunchCardComponent } from './components/single-launch-card/singl
 import { SingleAstronautComponent } from './components/single-astronaut/single-astronaut.component';
 import { DescriptionCardComponent } from './components/description-card/description-card.component';
 import { CountdownComponent } from './components/countdown/countdown.component';
+import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 
 
 
@@ -15,7 +16,8 @@ import { CountdownComponent } from './components/countdown/countdown.component';
     SingleLaunchCardComponent,
     SingleAstronautComponent,
     DescriptionCardComponent,
-    CountdownComponent
+    CountdownComponent,
+    CustomModalComponent
   ],
   imports:[
     RouterModule,

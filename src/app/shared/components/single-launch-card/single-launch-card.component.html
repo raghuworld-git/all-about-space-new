@@ -1,18 +1,36 @@
-<a [routerLink]="[url,launchInfo.slug]">
-    <div class="bg-image customSize card darkColor shadow-1-strong" [style.background-image]="'url('+launchInfo.image+')'">
-      <div class="card-body text-white d-flex flex-column rgba-black-light">            
-          <span class="mb-1 d-inline-block text-truncate" [title]='launchInfo.name'>{{launchInfo.name}}</span>        
-          <h6>
-            <span [title]="launchInfo.status.name" [ngClass]="['badge','badge-'+launchInfo.statusColor+ ' mb-1']">{{launchInfo.status.abbrev}}            
-            </span>
-  
-            &nbsp;
-            
-            <span *ngIf="launchInfo.rocket.spacecraft_stage!=null" [title]="launchInfo.status.description" class="badge badge-secondary mb-1">Manned           
-            </span>
-          </h6>
-          <span class="mb-2">{{launchInfo.net | date:'medium'}}</span>
-          <small [title]='launchInfo.launch_service_provider.name' class="d-inline-block text-truncate">{{launchInfo.launch_service_provider.name}}</small>                   
-      </div>
+<a [routerLink]="[url, launchInfo.slug]">
+  <div
+    class="bg-image darkColor customSize card shadow-1-strong"
+    [style.background-image]="'url(' + launchInfo.image + ')'"
+  >
+    <div class="card-body text-white d-flex flex-column rgba-black-light">
+      <span
+        class="mb-1 d-inline-block text-truncate"
+        [title]="launchInfo.name"
+        >{{ launchInfo.name }}</span
+      >
+      <h6>
+        <span
+          [title]="launchInfo.status.name"
+          [ngClass]="['badge', 'badge-' + launchInfo.statusColor + ' mb-1']"
+          >{{ launchInfo.status.abbrev }}
+        </span>
+
+        &nbsp;
+
+        <span
+          *ngIf="launchInfo.rocket.spacecraft_stage != null"
+          [title]="launchInfo.status.description"
+          class="badge badge-secondary mb-1"
+          >Manned
+        </span>
+      </h6>
+      <span class="mb-2">{{ launchInfo.net | date: "medium" }}</span>
+      <small
+        [title]="launchInfo.launch_service_provider.name"
+        class="d-inline-block text-truncate"
+        >{{ launchInfo.launch_service_provider.name }}</small
+      >
     </div>
-  </a>
+  </div>
+</a>

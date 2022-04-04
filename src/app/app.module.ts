@@ -10,6 +10,7 @@ import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TimezoneChangeComponent } from './core/components/timezone/timezone-change/timezone-change.component';
 
 @NgModule({
   declarations: [

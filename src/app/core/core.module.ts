@@ -25,6 +25,7 @@ import { SpinnerComponent } from "./components/spinner/spinner.component";
 
 import { LoaderInterceptor } from "./interceptor/loader.interceptor";
 import { TimezoneComponent } from './components/timezone/timezone.component';
+import { TimezoneChangeComponent } from "./components/timezone/timezone-change/timezone-change.component";
 
 
 
@@ -32,7 +33,8 @@ import { TimezoneComponent } from './components/timezone/timezone.component';
     declarations: [
         HeaderComponent,
         SpinnerComponent,
-        TimezoneComponent
+        TimezoneComponent,
+        TimezoneChangeComponent
     ],
     providers: [
         {

@@ -4,14 +4,11 @@
       tzService.getBrowserTimeZone()
     }}</span>
     &nbsp;
-    <i title="Change TimeZone" class="fa fa-cog" style="cursor: pointer"></i>
-    <!-- <select>
-      <option
-        *ngFor="let tz of tzService.getListOfTimeZones()"
-        [value]="tz.tzCode"
-      >
-        {{ tz.label }}
-      </option>
-    </select> -->
+    <i
+      (click)="openModal()"
+      title="Change TimeZone"
+      class="fa fa-cog"
+      style="cursor: pointer"
+    ></i>
   </div>
 </div>

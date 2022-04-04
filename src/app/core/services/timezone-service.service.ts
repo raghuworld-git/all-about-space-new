@@ -5,21 +5,46 @@ import * as utc from "dayjs/plugin/utc";
 import * as timezone from "dayjs/plugin/timezone";
 
 import { ITimeZone } from '../../shared/models/timeZone.model';
+import { LocalStorageEnum } from '../../shared/models/localStorage-key-enum.enum';
+import { LocalStorageService } from "./local-storage.service";
 
 @Injectable({
     providedIn: "root"
 })
 export class TimeZoneService {
-    constructor() {
+
+    constructor(private _localStorage: LocalStorageService) {
         dayjs.extend(utc);
         dayjs.extend(timezone);
     }
 
     getBrowserTimeZone(): string {
-        return dayjs.tz.guess();
+        console.log('calling this call again again unncessarily')
+        let localStorageValueByKey = this._localStorage.loadInfo(LocalStorageEnum.timezone);
+        if (localStorageValueByKey === null) {
+            this._localStorage.setInfo({ key: LocalStorageEnum.timezone, value: dayjs.tz.guess() });
+            localStorageValueByKey = dayjs.tz.guess();
+        }
+        if (localStorageValueByKey === "Asia/Calcutta") {
+            localStorageValueByKey = "Asia/Kolkata";
+        }
+        return localStorageValueByKey;
     }
 
-    getListOfTimeZones():ITimeZone[] {
-        return timezones;
+    getListOfTimeZones(): ITimeZone[] {
+        return timezones.sort((a, b) => {
+            let fa = a.label.toLocaleLowerCase(), fb = b.label.toLocaleLowerCase();
+            if (fa < fb) {
+                return -1;
+            }
+            else if (fa > fb) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    updateTimeZone(data: string) {
+        this._localStorage.setInfo({ key: LocalStorageEnum.timezone, value: data })
     }
 }

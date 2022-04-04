@@ -1,0 +1,28 @@
+<div class="modal-content darkColor">
+  <div class="modal-header">
+    <h6 class="modal-title">Change TimeZone</h6>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="closeModal()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <select style="width: 100%" #timezoneSelectRef>
+      <option
+        *ngFor="let tz of tzService.getListOfTimeZones()"
+        [selected]="tz.tzCode === tzService.getBrowserTimeZone()"
+        [value]="tz.tzCode"
+      >
+        {{ tz.label }}
+      </option>
+    </select>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-light" (click)="closeModal()">
+      Close
+    </button>
+    <button type="button" class="btn btn-outline-light">Save</button>
+  </div>
+</div>

@@ -8,12 +8,13 @@ import { LoaderService } from './core/services/loader.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  constructor(public loader: LoaderService) { }
+  constructor(private loader: LoaderService) { }
   isLoading = false;
 
-  private subscribe: Subscription;
+  private subscribe: Subscription;  
 
-  ngOnInit() {
+  ngOnInit() {    
+    console.log('me first');
     this.subscribe = this.loader.loading$.subscribe((value) => {
       Promise.resolve(null).then(() => this.isLoading = value);
     })
