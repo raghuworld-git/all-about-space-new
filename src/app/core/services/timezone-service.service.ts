@@ -15,7 +15,7 @@ import { LocalStorageService } from "./local-storage.service";
 })
 export class TimeZoneService {
 
-    private _myData$ = new BehaviorSubject<string>(this.getBrowserTimeZone());
+    private _myData$:BehaviorSubject<string> = new BehaviorSubject<string>(this._localStorage.loadInfo(LocalStorageEnum.timezone));
     myData$ = this._myData$.asObservable();
 
 
@@ -38,7 +38,7 @@ export class TimeZoneService {
 
     getListOfTimeZones(): ITimeZone[] {
         return timezones.sort((a, b) => {
-            let fa = a.name.toLocaleLowerCase(), fb = b.name.toLocaleLowerCase();
+            let fa = a.label.toLocaleLowerCase(), fb = b.label.toLocaleLowerCase();
             if (fa < fb) {
                 return -1;
             }

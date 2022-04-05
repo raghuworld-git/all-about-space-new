@@ -25,12 +25,12 @@
           >Manned
         </span>
       </h6>
-      <span class="mb-2">{{ launchInfo.net | date: "medium" }}</span>
+      <span class="mb-2">{{ launchdateByTz  }}</span>
       <small
         [title]="launchInfo.launch_service_provider.name"
         class="d-inline-block text-truncate"
         >{{ launchInfo.launch_service_provider.name }}</small
       >
     </div>
-  </div>
+  </div>  
 </a>

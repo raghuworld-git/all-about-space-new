@@ -11,7 +11,7 @@
   <div class="modal-body">
     <select style="width: 100%" #timezoneSelectRef>
       <option
-        *ngFor="let tz of tzService.getListOfTimeZones()"
+        *ngFor="let tz of listOfTimeZones"
         [selected]="tz.tzCode === locallyStoredTZ"
         [value]="tz.tzCode"        
       >

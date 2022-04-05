@@ -1,9 +1,14 @@
 import { Injectable } from "@angular/core";
+import * as dayjs from 'dayjs';
+import * as utc from "dayjs/plugin/utc";
+import * as timezone from "dayjs/plugin/timezone";
+import { TimeZoneService } from "../timezone-service.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LaunchUtilService {
+  constructor(private _timeZoneService:TimeZoneService){}
   private launchStatusList: { abbrev: string }[] =
     [
       { abbrev: 'Hold' },
@@ -80,5 +85,11 @@ export class LaunchUtilService {
     }
 
     return statusList;
+  }
+
+  getChangedTimeByTimeZone(datetime:string) {
+      dayjs.extend(utc);
+      dayjs.extend(timezone);
+      return dayjs(datetime).tz(this._timeZoneService.getBrowserTimeZone()).toString();
   }
 }

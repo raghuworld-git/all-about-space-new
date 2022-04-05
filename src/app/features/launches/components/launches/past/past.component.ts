@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { LaunchService } from 'src/app/core/services/launch/launch-service.service';
+import { TimeZoneService } from 'src/app/core/services/timezone-service.service';
 import { LaunchInfoModel } from 'src/app/shared/models/launch/launchInfo.model';
 
 @Component({
@@ -11,7 +12,8 @@ import { LaunchInfoModel } from 'src/app/shared/models/launch/launchInfo.model';
 export class PastComponent implements OnInit {
 
   constructor(    
-    private launchService: LaunchService
+    private launchService: LaunchService,
+    public tzService:TimeZoneService
   ) { }
 
   launchList: LaunchInfoModel[] = [];

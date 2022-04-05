@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LaunchUtilService } from 'src/app/core/services/launch/launchUtil.service';
+import { TimeZoneService } from 'src/app/core/services/timezone-service.service';
 import { LaunchInfoModel } from 'src/app/shared/models/launch/launchInfo.model';
 import { LaunchService } from '../../../../../core/services/launch/launch-service.service';
 
@@ -12,6 +14,7 @@ export class UpcomingComponent implements OnInit, OnDestroy {
 
   constructor(
     private launchService: LaunchService,
+    public tzService:TimeZoneService
   ) { }
 
   launchList: LaunchInfoModel[] = [];
@@ -33,9 +36,8 @@ export class UpcomingComponent implements OnInit, OnDestroy {
   private getlaunchesByType(filterType:{name:string,value:string} | null = null) {    
     this.launchServiceSubscription = this.launchService.getUpcomingLaunches(filterType)
       .subscribe(data => {
-        this.launchList = data;
-      });
-
+        this.launchList = data;        
+      });    
   }
 
 }
