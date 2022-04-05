@@ -10,8 +10,7 @@
 ></app-launch-filter>
 <ng-container *ngIf="launchList.length > 0"> 
   <div class="row">
-    <div class="col-md-6 col-xs-12 my-1" *ngFor="let launch of launchList">
-    {{this.tzService.myData$ | async}}
+    <div class="col-md-6 col-xs-12 my-1" *ngFor="let launch of launchList">    
       <app-single-launch-card
         [url]="'/launches/launchdetail'"
         [launchInfo]="launch"
