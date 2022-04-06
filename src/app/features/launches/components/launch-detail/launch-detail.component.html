@@ -10,7 +10,7 @@
       <img
         [src]="launchDetails?.image"
         [ngStyle]="{ height: '300px' }"
-        class="img-fluid rounded"
+        class="img-fluid  cover rounded"
         [alt]="launchDetails?.name"
       />
     </div>
@@ -20,13 +20,14 @@
           <app-countdown
             [finalDate]="launchDetails.net"
             *ngIf="!launchDetails.isLaunchCompleted; else launchCompletedTimeRef"
+            [$localStoragetzone]="this.timeZone.myData$"
           ></app-countdown>
           <ng-template #launchCompletedTimeRef>
             <p class="h4">T+ 00 d : 00 h : 00 m: 00 s</p>
           </ng-template>
           <p>
             <i data-test="fa" class="fa fa-calendar-day"></i>
-            {{ launchDetails.net | date: "medium" }}
+            {{ formattedLaunchTimeByZone }}
           </p>
           <p>
             <span class="badge badge-secondary">

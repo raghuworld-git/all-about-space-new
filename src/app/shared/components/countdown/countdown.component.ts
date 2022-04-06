@@ -1,5 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import { interval, Observable, Subscription } from 'rxjs';
+import * as dayjs from 'dayjs';
+import * as utc from "dayjs/plugin/utc";
+import * as timezone from "dayjs/plugin/timezone";
 
 
 @Component({
@@ -10,11 +13,18 @@ import { interval, Subscription } from 'rxjs';
 export class CountdownComponent implements OnInit, OnDestroy {
 
   @Input() finalDate!: string;
+  @Input() $localStoragetzone!: Observable<string>;
+
+  constructor() {
+    dayjs.extend(utc);
+    dayjs.extend(timezone);
+  }
 
   private subscription!: Subscription;
+  private currentZone:string;
 
   public dateNow!: Date;
-  public dDay!: Date;
+  public dDay!: dayjs.Dayjs;
 
 
   milliSecondsInASecond = 1000;
@@ -29,7 +39,7 @@ export class CountdownComponent implements OnInit, OnDestroy {
   public daysToDday: number = 0;
 
   private getTimeDifference() {
-    this.timeDifference = this.dDay.getTime() - new Date().getTime();
+    this.timeDifference = this.dDay.diff(dayjs().tz(this.currentZone));
     this.allocateTimeUnits(this.timeDifference);
   }
 
@@ -40,14 +50,15 @@ export class CountdownComponent implements OnInit, OnDestroy {
     this.daysToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * this.minutesInAnHour * this.SecondsInAMinute * this.hoursInADay));
   }
 
-  islaunchTimePast():boolean {
-    return this.dDay<(new Date());
+  islaunchTimePast(): boolean {
+    return  (dayjs().tz(this.currentZone).isAfter(this.dDay));
   }
 
-  ngOnInit(): void {
-    this.dateNow = new Date();
-    this.dDay = new Date(this.finalDate);
-    
+  ngOnInit(): void {    
+    this.$localStoragetzone.subscribe((tZone) => {
+      this.currentZone = tZone;
+      this.dDay = dayjs(this.finalDate).tz(tZone);        
+    });    
     this.subscription = interval(1000)
       .subscribe(x => { this.getTimeDifference(); });
   }

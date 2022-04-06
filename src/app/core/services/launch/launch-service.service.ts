@@ -28,7 +28,7 @@ export class LaunchService {
     let params: IQueryParams[] = [];
     params.push({ name: 'mode', value: 'detailed' });
     params.push({ name: 'hide_recent_previous', value: 'true' });
-
+    params.push({name:'limit',value:'6'});
 
     if (filterType?.name === 'is_crewed') {
       params.push({ name: 'is_crewed', value: 'true' });
@@ -45,6 +45,7 @@ export class LaunchService {
     let params: IQueryParams[] = [];
     params.push({ name: 'mode', value: 'detailed' });
     params.push({ name: 'hide_recent_previous', value: 'true' });
+    params.push({name:'limit',value:'6'});
 
     if (filterType?.name === 'is_crewed') {
       params.push({ name: 'is_crewed', value: 'true' });

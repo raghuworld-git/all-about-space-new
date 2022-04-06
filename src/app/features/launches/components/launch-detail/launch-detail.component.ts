@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { ILaunchDetailModel } from '../../../../shared/models/launch/launchDetail.model';
 import { LaunchService } from '../../../../core/services/launch/launch-service.service';
+import { TimeZoneService } from 'src/app/core/services/timezone-service.service';
 
 
 
@@ -18,33 +19,41 @@ export class LaunchDetailComponent implements OnInit, OnDestroy {
   constructor(
     private router: ActivatedRoute,
     private launchService: LaunchService,
-    private domSanitize: DomSanitizer
+    private domSanitize: DomSanitizer,
+    private timeZone: TimeZoneService
   ) { }
 
   slug!: string | null;
-
   launchDetails!: ILaunchDetailModel;
   videoURL: SafeResourceUrl | null = null;
   failOrHoldReason!: IFailHoldReason | null;
+  formattedLaunchTimeByZone: string;
 
   private launchServiceSubscription!: Subscription;
+  private timezoneSubscription!: Subscription;
 
   ngOnInit(): void {
     this.router.paramMap.subscribe((params: ParamMap) => {
       this.slug = params.get("slug");
+
       this.launchServiceSubscription = this.launchService.getlaunchDetailsBySlug(this.slug!)
         .subscribe({
           next: data => {
             this.launchDetails = data;
             this.videoURL = this.launchDetails.vidURLCustom != null ? this.domSanitize.bypassSecurityTrustResourceUrl(this.launchDetails.vidURLCustom!) : null;
             this.failOrHoldReason = this.getReasonIfany(this.launchDetails.status?.abbrev, this.launchDetails.holdreason, this.launchDetails.failreason);
+            this.timezoneSubscription = this.timeZone.myData$.subscribe((tzone) => {
+              this.formattedLaunchTimeByZone = this.timeZone.getChangeDateTimeByTimeZone(this.launchDetails.net, tzone);
+            })
           }
-        })
+        });
+
     })
   }
 
   ngOnDestroy(): void {
     this.launchServiceSubscription?.unsubscribe();
+    this.timezoneSubscription?.unsubscribe();
   }
 
   private getReasonIfany(status: string, hold: string | null, fail: string | null): IFailHoldReason | null {

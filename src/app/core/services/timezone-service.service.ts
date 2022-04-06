@@ -15,7 +15,7 @@ import { LocalStorageService } from "./local-storage.service";
 })
 export class TimeZoneService {
 
-    private _myData$:BehaviorSubject<string> = new BehaviorSubject<string>(this._localStorage.loadInfo(LocalStorageEnum.timezone));
+    private _myData$: BehaviorSubject<string> = new BehaviorSubject<string>(this._localStorage.loadInfo(LocalStorageEnum.timezone));
     myData$ = this._myData$.asObservable();
 
 
@@ -24,8 +24,8 @@ export class TimeZoneService {
         dayjs.extend(timezone);
     }
 
-    getBrowserTimeZone(): string {           
-        let localStorageValueByKey = this._localStorage.loadInfo(LocalStorageEnum.timezone);        
+    getBrowserTimeZone(): string {
+        let localStorageValueByKey = this._localStorage.loadInfo(LocalStorageEnum.timezone);
         if (localStorageValueByKey === null || this.getListOfTimeZones().filter(x => x.tzCode.toLocaleLowerCase() === localStorageValueByKey.toLocaleLowerCase()).length <= 0) {
             this.updateTimeZone(dayjs.tz.guess());
             localStorageValueByKey = dayjs.tz.guess();
@@ -53,5 +53,9 @@ export class TimeZoneService {
         this._localStorage.setInfo({ key: LocalStorageEnum.timezone, value: data });
         this._myData$.next(data);
     }
-    
+
+    getChangeDateTimeByTimeZone(dtime: string, tzone: string): string {       
+        return dayjs(dtime).tz(tzone).format('DD MMM YYYY, HH:mm:ss');
+    }
+
 }
