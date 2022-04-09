@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
-import { TimeZoneService } from 'src/app/core/services/timezone-service.service';
 import { ITimeZone } from 'src/app/shared/models/timeZone.model';
 
 @Component({
@@ -22,8 +21,7 @@ export class TimezoneChangeComponent implements OnInit {
     //this.locallyStoredTZ = this.tzService.getBrowserTimeZone();
   }
 
-  closeModal(save: boolean): void {
-
+  closeModal(save: boolean): void {           
     this.modalRef.close(save ? this.tzSelectRef.nativeElement.value : null);
   }
 

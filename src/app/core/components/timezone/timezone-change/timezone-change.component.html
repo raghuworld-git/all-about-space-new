@@ -10,19 +10,31 @@
   </div>
   <div class="modal-body">
     <select style="width: 100%" #timezoneSelectRef>
-      <option
-        *ngFor="let tz of listOfTimeZones"
-        [selected]="tz.tzCode === locallyStoredTZ"
-        [value]="tz.tzCode"        
-      >
-        {{ tz.label }}
-      </option>
+      <optgroup>
+        <option
+          *ngFor="let tz of listOfTimeZones"
+          [selected]="tz.tzCode === locallyStoredTZ"
+          [value]="tz.tzCode"
+        >
+          {{ tz.name }}
+        </option>
+      </optgroup>
     </select>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-light" (click)="closeModal(false)">
+    <button
+      type="button"
+      class="btn btn-outline-light"
+      (click)="closeModal(false)"
+    >
       Close
     </button>
-    <button type="button" class="btn btn-outline-light" (click)="closeModal(true)">Save</button>
+    <button
+      type="button"
+      class="btn btn-outline-light"
+      (click)="closeModal(true)"
+    >
+      Save
+    </button>
   </div>
 </div>

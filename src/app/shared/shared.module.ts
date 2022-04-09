@@ -6,6 +6,7 @@ import { SingleAstronautComponent } from './components/single-astronaut/single-a
 import { DescriptionCardComponent } from './components/description-card/description-card.component';
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
+import { YoutubeVideoIframComponent } from './components/youtube-video-ifram/youtube-video-ifram.component';
 
 
 
@@ -17,7 +18,8 @@ import { CustomModalComponent } from './components/custom-modal/custom-modal.com
     SingleAstronautComponent,
     DescriptionCardComponent,
     CountdownComponent,
-    CustomModalComponent
+    CustomModalComponent,
+    YoutubeVideoIframComponent
   ],
   imports:[
     RouterModule,
@@ -28,6 +30,7 @@ import { CustomModalComponent } from './components/custom-modal/custom-modal.com
       SingleAstronautComponent,
       DescriptionCardComponent,
       CountdownComponent,
+      YoutubeVideoIframComponent,
       CommonModule      
   ]
 })

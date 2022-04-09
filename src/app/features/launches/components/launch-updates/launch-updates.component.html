@@ -1,0 +1,35 @@
+<div class="table-wrapper-scroll-y my-custom-scrollbar">
+  <table class="table table-responsive align-middle darkColor text-light" style="font-size: small;">
+    <thead class="">
+      <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let updateItem of updates">
+        <td>
+          <div class="d-flex align-items-center">
+            <img
+              [src]="updateItem?.profile_image"
+              alt=""
+              style="width: 30px; height: 30px"
+              class="rounded-circle"
+            />
+            <div class="ms-3">
+              <p class="mb-1">{{ updateItem.created_by }}</p>
+              <p class="text-muted mb-0">{{ updateItem.created_on }}</p>
+            </div>
+          </div>
+        </td>
+        <td>
+          {{ updateItem.comment }}
+        </td>
+        <td>
+          <a target="_blank" [href]='updateItem.info_url'>Soure</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

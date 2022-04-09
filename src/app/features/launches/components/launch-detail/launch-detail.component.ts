@@ -44,7 +44,7 @@ export class LaunchDetailComponent implements OnInit, OnDestroy {
             this.failOrHoldReason = this.getReasonIfany(this.launchDetails.status?.abbrev, this.launchDetails.holdreason, this.launchDetails.failreason);
             this.timezoneSubscription = this.timeZone.myData$.subscribe((tzone) => {
               this.formattedLaunchTimeByZone = this.timeZone.getChangeDateTimeByTimeZone(this.launchDetails.net, tzone);
-            })
+            })            
           }
         });
 

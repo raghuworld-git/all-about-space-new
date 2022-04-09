@@ -1,0 +1,23 @@
+<iframe
+  *ngIf="videoURL != null; else elseVideoTempRef"
+  width="100%"
+  [height]="height"
+  [src]="videoURL"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen
+></iframe>
+<ng-template #elseVideoTempRef>
+  <div
+    class="card darkColor"
+    width="100%"
+    [ngStyle]="{ height: height }"
+    style="height: 315px !important"
+  >
+    <div class="card-body d-flex align-items-center justify-content-center">
+      <i class="fa-brands fa-youtube"></i> &nbsp;
+      <p class="card-text">Video not available.</p>
+    </div>
+  </div>
+</ng-template>

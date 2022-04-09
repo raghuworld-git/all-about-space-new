@@ -7,6 +7,7 @@ import { UpcomingComponent } from './components/launches/upcoming/upcoming.compo
 import { PastComponent } from './components/launches/past/past.component';
 import { LaunchDetailComponent } from "./components/launch-detail/launch-detail.component";
 import { LaunchFilterComponent } from './components/launches/launch-filter/launch-filter.component';
+import { LaunchUpdatesComponent } from './components/launch-updates/launch-updates.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { LaunchFilterComponent } from './components/launches/launch-filter/launc
     UpcomingComponent,
     PastComponent,
     LaunchDetailComponent,
-    LaunchFilterComponent    
+    LaunchFilterComponent,
+    LaunchUpdatesComponent    
   ],
   imports:[  
     LaunchesRoutingModule,

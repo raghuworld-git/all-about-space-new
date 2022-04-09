@@ -28,7 +28,7 @@ export class LaunchService {
     let params: IQueryParams[] = [];
     params.push({ name: 'mode', value: 'detailed' });
     params.push({ name: 'hide_recent_previous', value: 'true' });
-    params.push({name:'limit',value:'6'});
+    params.push({ name: 'limit', value: '6' });
 
     if (filterType?.name === 'is_crewed') {
       params.push({ name: 'is_crewed', value: 'true' });
@@ -45,7 +45,7 @@ export class LaunchService {
     let params: IQueryParams[] = [];
     params.push({ name: 'mode', value: 'detailed' });
     params.push({ name: 'hide_recent_previous', value: 'true' });
-    params.push({name:'limit',value:'6'});
+    params.push({ name: 'limit', value: '6' });
 
     if (filterType?.name === 'is_crewed') {
       params.push({ name: 'is_crewed', value: 'true' });
@@ -74,6 +74,8 @@ export class LaunchService {
   private populateCustomProperties(launchDetails: ILaunchDetailModel): ILaunchDetailModel {
     let launchTempData: ILaunchDetailModel = { ...launchDetails };
     let crewMembers: IAstronautModel[] = [];
+
+    launchTempData.image = launchTempData.image == null ? "../../assets/images/default-launch.jpg" : launchTempData.image;
     if (launchDetails.rocket.spacecraft_stage != null) {
       launchDetails.rocket.spacecraft_stage.landing_crew.map((crew) => {
         crewMembers.push({ role: crew.role, astronaut: crew.astronaut });
@@ -115,7 +117,8 @@ export class LaunchService {
     let data = launchesList;
 
     data.forEach((launches) => {
-      launches.statusColor = this.launchUtil.getBadgeColor(launches.status.abbrev)
+      launches.statusColor = this.launchUtil.getBadgeColor(launches.status.abbrev);
+      launches.image = launches.image == null ? "../../assets/images/default-launch.jpg" : launches.image;
     });
 
     return data;
