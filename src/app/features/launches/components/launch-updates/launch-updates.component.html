@@ -1,9 +1,9 @@
 <div class="table-wrapper-scroll-y my-custom-scrollbar">
-  <table class="table table-responsive align-middle darkColor text-light" style="font-size: small;">
+  <table class="table table-responsive align-middle darkColor text-light">
     <thead class="">
       <tr>
-        <th>Name</th>
-        <th>Title</th>
+        <th></th>
+        <th>Commentry</th>
         <th></th>
       </tr>
     </thead>
@@ -14,12 +14,12 @@
             <img
               [src]="updateItem?.profile_image"
               alt=""
-              style="width: 30px; height: 30px"
+              style="width: 50px; height: 50px"
               class="rounded-circle"
             />
             <div class="ms-3">
               <p class="mb-1">{{ updateItem.created_by }}</p>
-              <p class="text-muted mb-0">{{ updateItem.created_on }}</p>
+              <p class="text-muted mb-0">{{ updateItem.created_on | date:'medium' }}</p>
             </div>
           </div>
         </td>
@@ -27,7 +27,7 @@
           {{ updateItem.comment }}
         </td>
         <td>
-          <a target="_blank" [href]='updateItem.info_url'>Soure</a>
+         <b><a target="_blank" style="color:white" [href]='updateItem.info_url'>Source</a></b> 
         </td>
       </tr>
     </tbody>

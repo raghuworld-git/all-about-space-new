@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-description-card',
   templateUrl: './description-card.component.html',
-  styleUrls: ['./description-card.component.css']
+  styleUrls: ['./description-card.component.css'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class DescriptionCardComponent {
 
@@ -11,6 +12,7 @@ export class DescriptionCardComponent {
   toggleText:boolean=false;
 
   @Input() set description(desc:string|null|undefined){
+    let tempDesc = desc;
     if(desc===null || desc === undefined || desc.trim()==""){
       this._description="No data available";
     }
@@ -20,9 +22,7 @@ export class DescriptionCardComponent {
   }
 
   get description():string{
-    // if(this._description.length<150){
-    //     return this._description+" ".repeat(150-this._description.length)
-    // }
+    
     return this._description;
   }
 
@@ -30,15 +30,12 @@ export class DescriptionCardComponent {
     this.toggleText=!this.toggleText;
   }
   
-  // addSpaces(description:string){
-  //   let spaces:string="";
-
-  //   if(description.length<150){
-  //     return "&nbsp;".repeat(150);
-  //   }
-  //   else{
-  //     return spaces;      
-  //   }
-  // }
+  addSpaces(description:string){
+    let spaces:string="";
+    if(description.length<150){
+      return "&nbsp;".repeat(150 - description.length);
+    }
+ 
+  }
 
 }

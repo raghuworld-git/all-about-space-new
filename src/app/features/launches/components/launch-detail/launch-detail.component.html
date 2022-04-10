@@ -21,11 +21,11 @@
 
     <div class="col-md-4">
 
-      <!-- Launch Countdown  along with NET time and launch location-->
+      <!-- Launch Countdown  along with NET time-->
       <div class="row mb-2">
         <div class="col-md-12">
           <div class="card darkColor">
-            <div class="card-body d-flex flex-column align-items-center text-center justify-content-center">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center">
               <app-countdown
               [finalDate]="launchDetails.net"
               *ngIf="
@@ -35,15 +35,12 @@
               [$localStoragetzone]="this.timeZone.myData$"
             ></app-countdown>
             <ng-template #launchCompletedTimeRef>
-              <p class="h4">T+ 00 d : 00 h : 00 m: 00 s</p>
+              <p class="h3">T+ 00 d : 00 h : 00 m: 00 s</p>
             </ng-template>
             <p>
               <i data-test="fa" class="fa fa-calendar-day"></i>
               {{ formattedLaunchTimeByZone }}
-            </p>
-            <p>
-              <i data-test="fa" class="fa fa-map-marker-alt"></i>
-              {{ launchDetails.pad.location.name }}
+            </p>           
             </div>
           </div> 
         </div>
@@ -68,6 +65,21 @@
               [ngClass]="['badge', 'badge-' + launchDetails.statusColor]"
               >{{ launchDetails?.status?.name }}
             </span>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+
+      <!-- launch location -->
+      <div class="row mb-2">
+        <div class="col-md-12">
+          <div class="card darkColor">
+            <div class="card-body d-flex align-items-center text-center justify-content-center">
+              <p>
+                <i data-test="fa" class="fa fa-map-marker-alt"></i>
+                {{ launchDetails.pad.location.name }}
+                </p>
             </div>
           </div> 
         </div>
@@ -101,6 +113,7 @@
     </div>
   </div>
 
+  <!-- Fail or Hold reason in case launch is on hold or failed -->
   <ng-container *ngIf="failOrHoldReason !== null">
     <div class="row mt-1">
       <div class="col">
@@ -114,11 +127,13 @@
       </div>
     </div>
   </ng-container>
+
   <div class="row">
+    <!-- Mission type and its description -->
     <div class="col-md-6 mt-1">
       <div class="row">
         <div class="col">
-          <h6>Mission :</h6>
+          <h6>Mission : {{ launchDetails.mission?.type }}</h6>
         </div>
       </div>
       <div class="row">
@@ -130,6 +145,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Rocket launcher Description -->
     <div class="col-md-6 mt-1">
       <div class="row">
         <div class="col">
@@ -145,21 +162,26 @@
         </div>
       </div>
     </div>
+
   </div>
 
-  <div class="row mt-2">
-    <div class="col-md-6">
+  <!-- Launch Video -->
+  <div class="row mt-2" *ngIf="videoURL!=null"s>
+    <div class="col-md-12">
       <div class="row">
         <div class="col">
           <h6>Launch video :</h6>
         </div>
       </div>
       <app-youtube-video-ifram
-        [height]="'300px'"
+        [height]="'400px'"
         [videoURL]="videoURL"
       ></app-youtube-video-ifram>
     </div>
-    <div class="col-md-6">
+  </div>
+
+  <div class="row mt-2" *ngIf="launchDetails.updates.length > 0">
+   <div class="col-md-12">
       <div class="row">
         <div class="col">
           <h6>Launch updates:</h6>
@@ -170,7 +192,7 @@
   </div>
 
   <ng-container *ngIf="launchDetails?.rocket?.spacecraft_stage != null">
-    <div class="row mt-1">
+    <div class="row mt-2">
       <div class="col">
         <h6>Crew members:</h6>
       </div>
@@ -185,18 +207,5 @@
         </a>
       </div>
     </div>
-  </ng-container>
-
-  <!-- <ng-container *ngIf="launchDetails.updates != null">
-    <div class="row mt-2">
-      <div class="col">
-        <h6>Launch updates:</h6>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2 mt-1" *ngFor="let update of launchDetails.updates">
-        <app-launch-updates [update]="update"></app-launch-updates>
-      </div>
-    </div>
-  </ng-container> -->
+  </ng-container>  
 </ng-container>

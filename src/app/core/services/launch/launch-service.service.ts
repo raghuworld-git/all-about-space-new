@@ -76,6 +76,7 @@ export class LaunchService {
     let crewMembers: IAstronautModel[] = [];
 
     launchTempData.image = launchTempData.image == null ? "../../assets/images/default-launch.jpg" : launchTempData.image;
+    
     if (launchDetails.rocket.spacecraft_stage != null) {
       launchDetails.rocket.spacecraft_stage.landing_crew.map((crew) => {
         crewMembers.push({ role: crew.role, astronaut: crew.astronaut });
