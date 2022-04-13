@@ -60,8 +60,15 @@
       </div>
       <div class="card-body">
           <p>
-            <i data-test="fa" class="fa fa-map-marker-alt"></i>
             {{ launchDetails.pad.location.name }}
+          </p>
+          <p>
+            <app-social-links
+            [mapsUrl]="launchDetails.pad?.map_url"
+            [wikiUrl]="launchDetails.pad?.wiki_url"
+            [info_url]="launchDetails.pad?.info_url"
+            >
+            </app-social-links>
           </p>
       </div>
     </div>

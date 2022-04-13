@@ -7,11 +7,12 @@ import { DescriptionCardComponent } from './components/description-card/descript
 import { CountdownComponent } from './components/countdown/countdown.component';
 import { CustomModalComponent } from './components/custom-modal/custom-modal.component';
 import { YoutubeVideoIframComponent } from './components/youtube-video-ifram/youtube-video-ifram.component';
+import { SocialLinksComponent } from './components/social-links/social-links.component';
 
 
 
 @NgModule({
-    
+
 
   declarations: [
     SingleLaunchCardComponent,
@@ -19,11 +20,12 @@ import { YoutubeVideoIframComponent } from './components/youtube-video-ifram/you
     DescriptionCardComponent,
     CountdownComponent,
     CustomModalComponent,
-    YoutubeVideoIframComponent
+    YoutubeVideoIframComponent,
+    SocialLinksComponent
   ],
   imports:[
     RouterModule,
-    CommonModule,    
+    CommonModule,
   ],
   exports:[
       SingleLaunchCardComponent,
@@ -31,9 +33,10 @@ import { YoutubeVideoIframComponent } from './components/youtube-video-ifram/you
       DescriptionCardComponent,
       CountdownComponent,
       YoutubeVideoIframComponent,
-      CommonModule      
+      SocialLinksComponent,
+      CommonModule
   ]
 })
 export class SharedModule {
-    
+
 }
