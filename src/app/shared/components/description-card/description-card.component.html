@@ -1,11 +1,5 @@
-<div class="card darkColor">
-  <div class="card-body text-center ">
-    
+
       {{ toggleText == false ? (description | slice: 0:150) : description }}
-    
-      <span [innerHTML]="addSpaces(description) "></span> 
-    <a (click)="toggleClick()" *ngIf="description.length > 150">
+    <a (click)="toggleClick()" *ngIf="description.length > 150" style="color: white;text-decoration: underline;">
       {{ toggleText == false ? " Show more" : "Show less" }}
     </a>
-  </div>
-</div>
