@@ -1,4 +1,4 @@
-<div class="card darkColor">
+<!-- <div class="card darkColor">
   <img
     [src]="crew.astronaut.profile_image"
     class="card-img-top"
@@ -26,4 +26,9 @@
       >
     </p>
   </div>
-</div>
+</div> -->
+
+<img [src]="crew.astronaut.profile_image" class="rounded-circle mb-2" style="width: 150px;"
+[alt]="crew.astronaut.name" />
+<p class="mb-2 h6"><strong>{{crew.astronaut.name}}</strong></p>
+<p class="text-muted">{{ crew.role.role }}</p>

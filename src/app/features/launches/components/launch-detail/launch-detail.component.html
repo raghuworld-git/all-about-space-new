@@ -101,7 +101,7 @@
     <div class="col-md-12">
       <div class="card darkColor text-center">
           <div class="card-header">
-            <h5>{{ failOrHoldReason!.reason }} reason :</h5>
+            <h5>{{ failOrHoldReason!.reason }} reason</h5>
           </div>
           <div class="card-body">
             <app-description-card [description]="failOrHoldReason!.description">
@@ -178,6 +178,26 @@
     </div>
   </div>
 
+  <ng-container *ngIf="launchDetails?.rocket?.spacecraft_stage != null">
+    <div class="row mt-3">
+      <div class="col-md-12">
+        <h5>Crew members</h5>
+        <hr/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div
+        class="col-4 col-sm-4 col-md-3 text-center"
+        *ngFor="let crewMember of launchDetails.customCrewMembers"
+      >
+        <a [routerLink]="['/astronaut', crewMember.astronaut.id]">
+          <app-single-astronaut [crew]="crewMember"></app-single-astronaut>
+        </a>
+      </div>
+    </div>
+  </ng-container>
+
   <div class="row mt-2" *ngIf="launchDetails.updates.length > 0">
    <div class="col-md-12">
       <div class="row">
@@ -188,22 +208,4 @@
       <app-launch-updates [updates]="launchDetails.updates"></app-launch-updates>
     </div>
   </div>
-
-  <ng-container *ngIf="launchDetails?.rocket?.spacecraft_stage != null">
-    <div class="row mt-2">
-      <div class="col">
-        <h6>Crew members:</h6>
-      </div>
-    </div>
-    <div class="row">
-      <div
-        class="col-md-3 mt-1"
-        *ngFor="let crewMember of launchDetails.customCrewMembers"
-      >
-        <a [routerLink]="['/astronaut', crewMember.astronaut.id]">
-          <app-single-astronaut [crew]="crewMember"></app-single-astronaut>
-        </a>
-      </div>
-    </div>
-  </ng-container>
 </ng-container>
