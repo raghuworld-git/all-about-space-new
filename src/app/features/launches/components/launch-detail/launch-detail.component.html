@@ -202,10 +202,23 @@
    <div class="col-md-12">
       <div class="row">
         <div class="col">
-          <h6>Launch updates:</h6>
+          <h5>Launch updates</h5>
+          <hr/>
         </div>
       </div>
-      <app-launch-updates [updates]="launchDetails.updates"></app-launch-updates>
+      <div class="row">
+        <div class="row d-flex">
+          <div class="col-md-12 my-custom-scrollbar">
+            <div class="card darkColor">
+              <ng-container *ngFor="let update of launchDetails.updates">
+                <app-launch-updates [update]="update" ></app-launch-updates>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        </div>
+
     </div>
-  </div>
 </ng-container>

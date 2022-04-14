@@ -1,8 +1,14 @@
-.cover{
-  object-fit: cover;
-  width: 100% !important;
-  height: 300px;
-}
+
 .flex-1 {
   flex: 1;
+}
+
+.my-custom-scrollbar {
+  display: block;
+  position: relative;
+  max-height: 400px !important;
+  overflow: auto;
+}
+.table-wrapper-scroll-y {
+  display: block;
 }

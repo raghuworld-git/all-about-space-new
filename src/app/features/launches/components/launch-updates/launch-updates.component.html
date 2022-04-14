@@ -1,35 +1,21 @@
-<div class="table-wrapper-scroll-y my-custom-scrollbar">
-  <table class="table table-responsive align-middle darkColor text-light">
-    <thead class="">
-      <tr>
-        <th></th>
-        <th>Commentry</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let updateItem of updates">
-        <td>
-          <div class="d-flex align-items-center">
-            <img
-              [src]="updateItem?.profile_image"
-              alt=""
-              style="width: 50px; height: 50px"
-              class="rounded-circle"
-            />
-            <div class="ms-3">
-              <p class="mb-1">{{ updateItem.created_by }}</p>
-              <p class="text-muted mb-0">{{ updateItem.created_on | date:'medium' }}</p>
-            </div>
-          </div>
-        </td>
-        <td>
-          {{ updateItem.comment }}
-        </td>
-        <td>
-         <b><a target="_blank" style="color:white" [href]='updateItem.info_url'>Source</a></b> 
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="card-body p-4">
+  <div class="d-flex flex-start">
+    <img class="rounded-circle shadow-1-strong me-3"
+      [src]="update?.profile_image" [alt]="update.created_by" width="60"
+      height="60" />
+    <div>
+      <h6 class="fw-bold mb-1">{{update.created_by}}</h6>
+      <div class="d-flex align-items-center mb-3">
+        <p class="mb-0">
+          {{update.created_on | date:'medium'}}
+        </p>
+       &nbsp;&nbsp; <a target="_blank" style="color:white" [href]='update.info_url'>Source
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+      </div>
+      <p class="mb-0">
+        {{update.comment}}
+      </p>
+    </div>
+  </div>
 </div>

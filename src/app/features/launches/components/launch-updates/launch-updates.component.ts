@@ -11,7 +11,7 @@ export class LaunchUpdatesComponent implements OnInit {
 
   constructor() { }
 
-  @Input() updates:ILaunchUpdatesModel[]=[];
+  @Input() update:ILaunchUpdatesModel;
 
   ngOnInit(): void {
   }
