@@ -211,7 +211,7 @@
           <div class="col-md-12 my-custom-scrollbar">
             <div class="card darkColor">
               <ng-container *ngFor="let update of launchDetails.updates">
-                <app-launch-updates [update]="update" ></app-launch-updates>
+                <app-launch-updates [$timezone]="this.timeZone.myData$" [update]="update" ></app-launch-updates>
               </ng-container>
             </div>
           </div>
