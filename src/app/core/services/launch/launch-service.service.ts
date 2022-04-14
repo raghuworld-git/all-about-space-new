@@ -76,7 +76,7 @@ export class LaunchService {
     let crewMembers: IAstronautModel[] = [];
 
     launchTempData.image = launchTempData.image == null ? "../../assets/images/default-launch.jpg" : launchTempData.image;
-    
+
     if (launchDetails.rocket.spacecraft_stage != null) {
       launchDetails.rocket.spacecraft_stage.landing_crew.map((crew) => {
         crewMembers.push({ role: crew.role, astronaut: crew.astronaut });
@@ -111,6 +111,9 @@ export class LaunchService {
     launchTempData.vidURLCustom = launchTempData.vidURLs.length > 0 ? this.launchUtil.createYoutubeEmbedURL(launchTempData.vidURLs[0].url) : null;
 
     launchTempData.isLaunchCompleted = this.launchUtil.isLaunchCompleted(launchTempData.status.id);
+    launchTempData.updates=launchTempData.updates?.sort((a,b)=>{
+      return (a.id>b.id)? -1 :1;
+          });
     return launchTempData;
   }
 
