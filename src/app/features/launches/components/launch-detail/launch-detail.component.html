@@ -59,17 +59,15 @@
          <h5>Launch pad</h5>
       </div>
       <div class="card-body">
-          <p>
             {{ launchDetails.pad.location.name }}
-          </p>
-          <p>
-            <app-social-links
-            [mapsUrl]="launchDetails.pad?.map_url"
-            [wikiUrl]="launchDetails.pad?.wiki_url"
-            [info_url]="launchDetails.pad?.info_url"
-            >
-            </app-social-links>
-          </p>
+      </div>
+      <div class="card-footer">
+        <app-social-links
+        [mapsUrl]="launchDetails.pad?.map_url"
+        [wikiUrl]="launchDetails.pad?.wiki_url"
+        [websiteUrl]="launchDetails.pad?.info_url"
+        >
+        </app-social-links>
       </div>
     </div>
     <!-- Launch pad card - END-->
@@ -81,21 +79,16 @@
         <h5>Agency</h5>
      </div>
       <div class="card-body">
-        <div class="d-flex align-items-center">
-          <img
-            [src]="launchDetails.launch_service_provider.logo_url"
-            [alt]="launchDetails.launch_service_provider.name"
-            style="width: 150px; height: 150px"
-            class="rounded"
-          />
-          <div class="ms-5">
-            <!-- <p class="text-muted mb-0">Agency:
-              <a [href]="launchDetails.launch_service_provider.wiki_url" style="color: whitesmoke;" target="_blank"><i class="fa-solid fa-up-right-from-square"></i>
-              </a>
-            </p> -->
-            <p class="mb-1">{{ launchDetails.launch_service_provider.name }}</p>
-          </div>
-        </div>
+        <p class="h5">{{ launchDetails.launch_service_provider.name }}</p>
+        <hr/>
+        <app-description-card  [description]="launchDetails.launch_service_provider.description"></app-description-card>
+      </div>
+      <div class="card-footer">
+        <app-social-links
+        [wikiUrl]="launchDetails.launch_service_provider?.wiki_url"
+        [websiteUrl]="launchDetails.launch_service_provider?.info_url"
+        >
+        </app-social-links>
       </div>
     </div>
     <!-- Agency card - END-->
@@ -124,9 +117,16 @@
     <!-- Mission & its description - START-->
     <div class="card text-center z-depth-2 darkColor w-100">
       <div class="card-header">
-         <h5>Mission : {{ launchDetails.mission?.type }}</h5>
+         <h5>Mission</h5>
       </div>
       <div class="card-body">
+        <p class="h5">
+          {{ launchDetails.mission?.name }}
+        </p>
+        <p class="text-muted">
+          {{ launchDetails.mission?.type }}
+        </p>
+        <hr/>
         <app-description-card
         [description]="launchDetails.mission?.description">
         </app-description-card>
@@ -138,12 +138,23 @@
     <!-- Rocket's description - START-->
     <div class="card danger-color text-center z-depth-2 darkColor w-100">
       <div class="card-header">
-        <h5>Rocket's description</h5>
+        <h5>Rocket</h5>
      </div>
       <div class="card-body">
+        <p class="h5">
+          {{ launchDetails.rocket.configuration.full_name }}
+        </p>
+        <hr/>
         <app-description-card
         [description]="launchDetails.rocket.configuration.description">
       </app-description-card>
+      </div>
+      <div class="card-footer">
+        <app-social-links
+        [wikiUrl]="launchDetails.rocket.configuration?.wiki_url"
+        [websiteUrl]="launchDetails.rocket.configuration?.info_url"
+        >
+        </app-social-links>
       </div>
     </div>
     <!-- Rocket's description - END-->

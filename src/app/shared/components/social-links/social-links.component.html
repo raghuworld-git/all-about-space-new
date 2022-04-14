@@ -4,8 +4,12 @@
 <ng-container *ngIf="wikiUrl!=null && wikiUrl !=''" >
   <a target="_blank" [href]="wikiUrl"><i class="fa-brands fa-wikipedia-w"></i>&nbsp;&nbsp;</a>
 </ng-container>
-<ng-container *ngIf="instaUrl!=null" ></ng-container>
-<ng-container *ngIf="twitterUrl!=null" ></ng-container>
+<ng-container *ngIf="instaUrl!=null" >
+  <a target="_blank" [href]="instaUrl"><i class="fa-brands fa-instagram"></i>&nbsp;&nbsp;</a>
+</ng-container>
+<ng-container *ngIf="twitterUrl!=null" >
+  <a target="_blank" [href]="twitterUrl"><i class="fa-brands fa-twitter"></i>&nbsp;&nbsp;</a>
+</ng-container>
 <ng-container *ngIf="websiteUrl!=null" >
-  <a target="_blank" [href]="websiteUrl"><i class="fa-solid fa-earth-africa"></i>&nbsp;&nbsp;</a>
+  <a target="_blank" [href]="websiteUrl"><i class="fa-brands fa-internet-explorer"></i>&nbsp;&nbsp;</a>
 </ng-container>
