@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { HttpRequestService } from "../http/http-request.service";
+import { HttpRequestService } from "../../../core/services/http/http-request.service";
 import { IAstronautDetailModel } from "../../../shared/models/launch/astronautDetail.model";
 
 @Injectable({
@@ -13,6 +13,6 @@ export class AstronautService {
         private action:string='astronaut';
 
         getAstronautDetailsById(id:string):Observable<IAstronautDetailModel>{
-            return this.requestService.get<IAstronautDetailModel>(`${this.action}/${id}`);    
+            return this.requestService.get<IAstronautDetailModel>(`${this.action}/${id}`);
         }
 }

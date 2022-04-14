@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { LaunchService } from 'src/app/core/services/launch/launch-service.service';
 import { TimeZoneService } from 'src/app/core/services/timezone-service.service';
 import { LaunchInfoModel } from 'src/app/shared/models/launch/launchInfo.model';
+import { LaunchService } from '../../../services/launch-service.service';
 
 @Component({
   selector: 'app-past',
@@ -11,7 +11,7 @@ import { LaunchInfoModel } from 'src/app/shared/models/launch/launchInfo.model';
 })
 export class PastComponent implements OnInit {
 
-  constructor(    
+  constructor(
     private launchService: LaunchService,
     public tzService:TimeZoneService
   ) { }
@@ -28,12 +28,12 @@ export class PastComponent implements OnInit {
     this.launchServiceSubscription?.unsubscribe();
   }
 
-  
+
   onSearch(searchEventData:{name:string,value:string} | null){
     this.getlaunchesByType(searchEventData);
   }
 
-  private getlaunchesByType(filterType: {name:string,value:string}|null = null) {           
+  private getlaunchesByType(filterType: {name:string,value:string}|null = null) {
     this.launchServiceSubscription = this.launchService.getPreviousLaunches(filterType)
       .subscribe(data => {
         this.launchList = data;

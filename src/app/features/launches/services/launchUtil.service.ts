@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import * as dayjs from 'dayjs';
 import * as utc from "dayjs/plugin/utc";
 import * as timezone from "dayjs/plugin/timezone";
-import { TimeZoneService } from "../timezone-service.service";
+import { TimeZoneService } from "src/app/core/services/timezone-service.service";
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,7 @@ export class LaunchUtilService {
   isLaunchCompleted(id: number): boolean {
     return [5, 3, 4, 7].includes(id);
     /**
-     * 5 - Hold 
+     * 5 - Hold
      * 3 - Success
      * 4 - Failure
      * 7 - Partial Failure

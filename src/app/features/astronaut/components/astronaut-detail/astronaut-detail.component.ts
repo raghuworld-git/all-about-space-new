@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { AstronautService } from '../../../../core/services/astronaut/astronaut-service.service';
+import { AstronautService } from '../../services/astronaut-service.service';
 
 @Component({
   selector: 'app-astronaut-detail',
@@ -11,7 +11,7 @@ export class AstronautDetailComponent implements OnInit {
 
   constructor(
     public astroService:AstronautService,
-    private route:ActivatedRoute 
+    private route:ActivatedRoute
     ) { }
 
   id:string|null="";
@@ -29,7 +29,7 @@ export class AstronautDetailComponent implements OnInit {
           console.log(err,'Error from Astronaut details component');
         }
       })
-    })    
+    })
   }
 
 }

@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { LaunchInfoModel } from '../../../shared/models/launch/launchInfo.model';
 import { ILaunchDetailModel } from '../../../shared/models/launch/launchDetail.model';
 import { IAstronautModel } from '../../../shared/models/launch/astronauts.model';
-import { HttpRequestService } from '../http/http-request.service';
+import { HttpRequestService } from '../../../core/services/http/http-request.service';
 import { LaunchUtilService } from './launchUtil.service';
 
 

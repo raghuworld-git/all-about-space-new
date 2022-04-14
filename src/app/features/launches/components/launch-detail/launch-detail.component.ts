@@ -4,8 +4,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ILaunchDetailModel } from '../../../../shared/models/launch/launchDetail.model';
-import { LaunchService } from '../../../../core/services/launch/launch-service.service';
+
 import { TimeZoneService } from 'src/app/core/services/timezone-service.service';
+import { LaunchService } from '../../services/launch-service.service';
 
 
 
