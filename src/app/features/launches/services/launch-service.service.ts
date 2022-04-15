@@ -6,7 +6,7 @@ import { LaunchInfoModel } from '../../../shared/models/launch/launchInfo.model'
 import { ILaunchDetailModel } from '../../../shared/models/launch/launchDetail.model';
 import { IAstronautModel } from '../../../shared/models/launch/astronauts.model';
 import { HttpRequestService } from '../../../core/services/http/http-request.service';
-import { LaunchUtilService } from './launchUtil.service';
+import { LaunchUtilService } from '../../../shared/services/launchUtil.service';
 
 
 @Injectable({
@@ -27,6 +27,7 @@ export class LaunchService {
   getUpcomingLaunches(filterType: IQueryParams | null): Observable<LaunchInfoModel[]> {
     let params: IQueryParams[] = [];
     params.push({ name: 'mode', value: 'detailed' });
+    params.push({ name: 'ordering', value: '`net`' });
     params.push({ name: 'hide_recent_previous', value: 'true' });
     params.push({ name: 'limit', value: '6' });
 
@@ -37,7 +38,7 @@ export class LaunchService {
       params.push({ name: 'status', value: filterType.value });
     }
     return this.requestService.get<ILaunchesResult>(this.upcomingAction, params).pipe(map((mapdata) => {
-      return this.populateLaunchListCustomProperties(mapdata.results);
+      return this.launchUtil.populateLaunchListCustomProperties(mapdata.results);
     }));
   }
 
@@ -55,7 +56,7 @@ export class LaunchService {
     }
 
     return this.requestService.get<ILaunchesResult>(this.previousAction, params).pipe(map((mapdata) => {
-      return this.populateLaunchListCustomProperties(mapdata.results);
+      return this.launchUtil.populateLaunchListCustomProperties(mapdata.results);
     }));
   }
 
@@ -115,18 +116,7 @@ export class LaunchService {
       return (a.id>b.id)? -1 :1;
           });
     return launchTempData;
-  }
-
-  private populateLaunchListCustomProperties(launchesList: LaunchInfoModel[]): LaunchInfoModel[] {
-    let data = launchesList;
-
-    data.forEach((launches) => {
-      launches.statusColor = this.launchUtil.getBadgeColor(launches.status.abbrev);
-      launches.image = launches.image == null ? "../../assets/images/default-launch.jpg" : launches.image;
-    });
-
-    return data;
-  }
+  }  
 }
 
 interface ILaunchesResult {

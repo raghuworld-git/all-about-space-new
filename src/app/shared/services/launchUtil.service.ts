@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import * as dayjs from 'dayjs';
 import * as utc from "dayjs/plugin/utc";
 import * as timezone from "dayjs/plugin/timezone";
-import { TimeZoneService } from "src/app/core/services/timezone-service.service";
+import { TimeZoneService } from "../../core/services/timezone-service.service";
+import { LaunchInfoModel } from "../models/launch/launchInfo.model";
 
 
 @Injectable({
@@ -92,5 +93,16 @@ export class LaunchUtilService {
       dayjs.extend(utc);
       dayjs.extend(timezone);
       return dayjs(datetime).tz(this._timeZoneService.getBrowserTimeZone()).toString();
+  }
+
+   populateLaunchListCustomProperties(launchesList: LaunchInfoModel[]): LaunchInfoModel[] {
+    let data = launchesList;
+
+    data.forEach((launches) => {
+      launches.statusColor = this.getBadgeColor(launches.status.abbrev);
+      launches.image = launches.image == null ? "../../assets/images/default-launch.jpg" : launches.image;
+    });
+
+    return data;
   }
 }

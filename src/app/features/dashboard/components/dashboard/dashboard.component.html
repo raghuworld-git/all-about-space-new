@@ -1,1 +1,64 @@
-<h5>Dashboard or Landing Page</h5>
+<div class="row">
+    <div class="col-md-8 mb-2 d-flex align-items-stretch">
+       <!-- Upcoming Launches -->
+      <div class="card darkColor w-100">
+        <div class="card-header">
+              <h5> Next Launch is in : &nbsp;  <app-countdown
+                [finalDate]="launchdata!.net"            
+                [$localStoragetzone]="this.timeZone.myData$"
+                >
+                </app-countdown>   </h5> 
+        </div>        
+        <div class="view overlay">
+          <img [src]="launchdata?.image" class="card-img-top" style="max-height: 500px;"
+            [alt]="launchdata?.name">
+          <a [routerLink]="['/launches/launchdetail',launchdata!.slug]">
+            <div class="mask rgba-white-slight"></div>
+          </a>
+        </div>        
+        <div class="card-body text-center">                    
+          <p>
+            <i data-test="fa" class="fa fa-calendar-day"></i>
+            {{ formattedLaunchTimeByZone }}
+          </p>
+          <h6 class="card-title">{{launchdata?.name}}</h6>
+          <span
+          [title]="launchdata?.status.name" 
+          [ngClass]="['badge', 'badge-' + launchdata?.statusColor + ' mb-1']"
+          >{{ launchdata?.status.abbrev }}          
+        </span> &nbsp;
+        <span class="badge badge-secondary">
+            {{
+                launchdata?.rocket?.spacecraft_stage != null
+                ? "Manned"
+                : "Un-manned"
+            }}
+            launch
+          </span>         
+        </div>
+  
+      </div>        
+    </div>
+
+    <div class="col-md-4 mb-4 d-flex align-items-stretch">
+  
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card darkColor">              
+                <div class="card-header text-center">
+                    <i class="fa-solid fa-cookie-bite"></i> &nbsp;  Quick Space Bites
+                </div>                
+                <div class="card-body">                  
+                  <h4 class="card-title">Card title</h4>                  
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                </div>
+          
+              </div>
+        </div>       
+    </div>
+    
+    </div>
+  </div>
+
+    

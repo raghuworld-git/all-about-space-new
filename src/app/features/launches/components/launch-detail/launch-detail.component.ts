@@ -54,7 +54,7 @@ export class LaunchDetailComponent implements OnInit, OnDestroy {
         });
 
         this.urlServiceSubscription = this.urlService.previousUrl$.subscribe((previousUrl: string) => {
-          this.previousURL = (previousUrl !=null ?"/"+previousUrl:previousUrl);
+          this.previousURL = (previousUrl !=null ?"/"+previousUrl:'/');
         });
     })
   }
