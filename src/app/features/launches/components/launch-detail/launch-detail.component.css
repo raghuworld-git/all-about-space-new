@@ -12,3 +12,8 @@
 .table-wrapper-scroll-y {
   display: block;
 }
+
+a{
+  text-decoration: none;
+color: white;
+}

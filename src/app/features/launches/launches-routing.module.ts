@@ -8,8 +8,10 @@ import { UpcomingComponent } from "./components/launches/upcoming/upcoming.compo
 
 
 const routes: Routes = [
-    { path: 'upcoming', component: UpcomingComponent},
-    { path: 'previous', component: PastComponent},    
+  { path: 'upcoming', component: UpcomingComponent},
+    { path: 'upcoming/:page', component: UpcomingComponent},
+    { path: 'previous', component: PastComponent},
+    { path: 'previous/:page', component: PastComponent},
     { path: 'launchdetail/:slug', component: LaunchDetailComponent }
 ];
 

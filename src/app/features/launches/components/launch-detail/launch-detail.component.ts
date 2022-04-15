@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -7,6 +7,7 @@ import { ILaunchDetailModel } from '../../../../shared/models/launch/launchDetai
 
 import { TimeZoneService } from 'src/app/core/services/timezone-service.service';
 import { LaunchService } from '../../services/launch-service.service';
+import { UrlService } from 'src/app/core/services/url.service';
 
 
 
@@ -21,7 +22,8 @@ export class LaunchDetailComponent implements OnInit, OnDestroy {
     private router: ActivatedRoute,
     private launchService: LaunchService,
     private domSanitize: DomSanitizer,
-    private timeZone: TimeZoneService
+    private timeZone: TimeZoneService,
+    private urlService:UrlService
   ) { }
 
   slug!: string | null;
@@ -29,9 +31,11 @@ export class LaunchDetailComponent implements OnInit, OnDestroy {
   videoURL: SafeResourceUrl | null = null;
   failOrHoldReason!: IFailHoldReason | null;
   formattedLaunchTimeByZone: string;
+  previousURL:string=null;
 
   private launchServiceSubscription!: Subscription;
   private timezoneSubscription!: Subscription;
+  private urlServiceSubscription!: Subscription;
 
   ngOnInit(): void {
     this.router.paramMap.subscribe((params: ParamMap) => {
@@ -49,12 +53,16 @@ export class LaunchDetailComponent implements OnInit, OnDestroy {
           }
         });
 
+        this.urlServiceSubscription = this.urlService.previousUrl$.subscribe((previousUrl: string) => {
+          this.previousURL = (previousUrl !=null ?"/"+previousUrl:previousUrl);
+        });
     })
   }
 
   ngOnDestroy(): void {
     this.launchServiceSubscription?.unsubscribe();
     this.timezoneSubscription?.unsubscribe();
+    this.urlServiceSubscription?.unsubscribe();
   }
 
   private getReasonIfany(status: string, hold: string | null, fail: string | null): IFailHoldReason | null {

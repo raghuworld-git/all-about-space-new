@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { LoaderService } from './core/services/loader.service';
 import { TimeZoneService } from './core/services/timezone-service.service';
+import { UrlService } from './core/services/url.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ import { TimeZoneService } from './core/services/timezone-service.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  constructor(private loader: LoaderService,private tzService:TimeZoneService,private router:Router) { }
+  constructor(private loader: LoaderService,private tzService:TimeZoneService,private urlService:UrlService,
+    private router:Router) { }
   isLoading = false;
 
   previousUrl: string = null;
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy {
     ).subscribe((event: NavigationEnd) => {
       this.previousUrl = this.currentUrl;
       this.currentUrl = event.url;
-      //this.urlService.setPreviousUrl(this.previousUrl);
+      this.urlService.setPreviousUrl(this.previousUrl);
     });
   }
 

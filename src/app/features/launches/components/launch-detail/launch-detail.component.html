@@ -3,7 +3,7 @@
   <!-- Launch Name ( header) -->
   <div class="row">
     <div class="col">
-      <h4>{{ launchDetails?.name }}</h4>
+      <h4><a [routerLink]="[previousURL]"><i class="fa-solid fa-circle-arrow-left"></i></a> &nbsp; &nbsp;{{ launchDetails?.name }}</h4>
     </div>
   </div>
 
@@ -212,6 +212,7 @@
             <div class="card darkColor">
               <ng-container *ngFor="let update of launchDetails.updates">
                 <app-launch-updates [$timezone]="this.timeZone.myData$" [update]="update" ></app-launch-updates>
+                <hr/>
               </ng-container>
             </div>
           </div>
